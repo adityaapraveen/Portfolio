@@ -1,0 +1,40 @@
+.squares-canvas {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    /* Remove default margin/padding of canvas */
+}
+
+/* Squares.css */
+.squares-background {
+    position: fixed;
+    /* Fix the background to the screen */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    /* Full width */
+    height: 100vh;
+    /* Full height */
+    z-index: -1;
+    /* Ensure it stays behind content */
+    overflow: hidden;
+    /* Prevent overflow */
+    animation: moveSquares 10s linear infinite;
+    /* Example animation */
+}
+
+/* Example square animation */
+@keyframes moveSquares {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(100px, 100px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}

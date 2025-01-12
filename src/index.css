@@ -1,0 +1,12 @@
+/* Hide scrollbar but allow scrolling for the entire app */
+body {
+    overflow-y: scroll;
+    /* Allow vertical scrolling */
+    scrollbar-width: none;
+    /* Hide scrollbar for Firefox */
+}
+
+body::-webkit-scrollbar {
+    display: none;
+    /* Hide scrollbar for Chrome, Safari, and Edge */
+}

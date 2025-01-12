@@ -1,0 +1,317 @@
+/* General Styles */
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  /* Hide scrollbar for Chrome, Safari, and Edge */
+}
+
+body {
+  overflow-y: scroll;
+  /* Allow vertical scrolling */
+  scrollbar-width: none;
+  /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  font-family: 'Open Sans', Arial, sans-serif;
+  color: #ccc;
+  margin: 0;
+  padding: 0;
+  background: #121212;
+}
+.App-header {
+  background-color: #1e1e1e;
+  padding: 5px 0;
+  font-size: 1.3em;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #ccc;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #1db954;
+}
+
+/* Hamburger menu styles (hidden by default) */
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar-toggle span {
+  width: 25px;
+  height: 3px;
+  background-color: #ccc;
+  transition: 0.3s;
+}
+
+/* Mobile view - Hide the nav items initially */
+nav ul {
+  display: flex;
+  flex-direction: row;
+  /* Default for larger screens */
+}
+
+nav ul.show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Show the hamburger menu on small screens */
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    /* Initially hide nav items */
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar-toggle {
+    display: flex;
+    /* Display the hamburger menu */
+  }
+
+  nav ul.show {
+    display: flex;
+    /* Display the menu when open */
+  }
+}
+
+section {
+  padding: 50px 20px;
+  text-align: center;
+  color: #e0e0e0;
+}
+
+.highlight {
+  color: #8b8b8b;
+}
+
+.revealed {
+  color: #1db954;
+}
+
+footer {
+  background-color: #1e1e1e;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 20px;
+  color: #ccc;
+}
+
+h1,
+h2 {
+  font-size: 3.5em;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 3em;
+  font-weight: 400;
+}
+
+p {
+  font-size: 1em;
+}
+
+/* Book Section */
+.book {
+  position: relative;
+  border-radius: 10px;
+  width: 220px;
+  height: 300px;
+  background-color: #f1e1c6;
+  box-shadow: 1px 1px 12px #8b8b8b;
+  transform: preserve-3d;
+  perspective: 2000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  overflow: visible;
+  margin: 20px;
+}
+
+.cover {
+  top: 0;
+  position: absolute;
+  background-color: #6d4f3b;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.5s;
+  transform-origin: 0;
+  box-shadow: 1px 1px 12px #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.cover p {
+  margin: 0;
+  padding: 5px 0;
+  color: white;
+}
+
+.dates {
+  font-size: 14px;
+  font-style: italic;
+  color: #b0b0b0;
+}
+
+.book:hover .cover {
+  transform: rotatey(-80deg);
+  background-color: #4b2f1d;
+}
+
+.experience-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Responsive Styles */
+
+/* For Tablets and Larger Phones (Up to 768px) */
+@media (max-width: 768px) {
+  .App-header {
+    font-size: 1.1em;
+  }
+
+  h1,
+  h2 {
+    font-size: 2.5em;
+  }
+
+  h3 {
+    font-size: 2.2em;
+  }
+
+  nav ul li {
+    margin: 0 10px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  section {
+    padding: 30px 15px;
+  }
+
+  .book {
+    width: 180px;
+    height: 250px;
+  }
+
+  .cover p {
+    font-size: 0.9em;
+  }
+
+  .dates {
+    font-size: 12px;
+  }
+}
+
+/* For Mobile (Up to 480px) */
+@media (max-width: 480px) {
+  .App-header {
+    font-size: 1em;
+  }
+
+  h1,
+  h2 {
+    font-size: 2em;
+  }
+
+  h3 {
+    font-size: 1.8em;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+  }
+
+  section {
+    padding: 20px 10px;
+  }
+
+  .book {
+    width: 150px;
+    height: 220px;
+  }
+
+  .cover p {
+    font-size: 0.85em;
+  }
+
+  .dates {
+    font-size: 12px;
+  }
+}
+
+/* For Large Laptops/Desktops (Above 1024px) */
+@media (min-width: 1024px) {
+  .App-header {
+    font-size: 1.5em;
+  }
+
+  h1,
+  h2 {
+    font-size: 3.5em;
+  }
+
+  h3 {
+    font-size: 3em;
+  }
+
+  section {
+    padding: 70px 30px;
+  }
+
+  .book {
+    width: 250px;
+    height: 350px;
+  }
+
+  .cover p {
+    font-size: 1.1em;
+  }
+
+  .dates {
+    font-size: 16px;
+  }
+}
