@@ -3,11 +3,15 @@ import './App.css';
 import SplitText from './animations/SplitText'; // Import SplitText component
 import DecryptedText from './animations/DecryptText'
 import BlurText from './animations/BlurText'
-import Hyperspeed from './animations/Hyperspeed';
-import Squares from './animations/Squares';
+// import Hyperspeed from './animations/Hyperspeed';
+// import Squares from './animations/Squares';
 import ScrollLinked from './animations/ScrollLinked';
-import Timeline from './animations/Timeline';
+// import Timeline from './animations/Timeline';
 import { useState } from 'react';
+import ContactMe from './animations/ContactMe';
+// import RollingGallery from './animations/RollingGallery';
+// import QuiltedImageList from './animations/QuiltedImageList';
+
 
 
 function App() {
@@ -187,7 +191,8 @@ for storage and event logging for transparency.</p>
         <h2>
           <SplitText text="Gallery" />
         </h2>
-        <p>[Image placeholders]</p>
+        <p>[Images To Be Added]</p>
+        
       </section>
 
       <section id="contact">
@@ -195,7 +200,7 @@ for storage and event logging for transparency.</p>
           <SplitText text="Contact" />
         </h2>
         <p>Email: <a href="mailto:adityapraveen18@gmail.com">adityapraveen18@gmail.com</a></p>
-        
+        <ContactMe />
       </section>
 
 
