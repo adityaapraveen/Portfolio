@@ -7,7 +7,7 @@ const Buttons = () => {
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="light-button flex gap-8">
             {/* WhatsApp Button */}
-            <a href="https://wa.me/yourwhatsapplink" target="_blank" rel="noopener noreferrer">
+            <a href="wa.link/y003mi" target="_blank" rel="noopener noreferrer">
               <button className="bt">
                 <div className="light-holder">
                     <div className="dot" />
@@ -23,7 +23,7 @@ const Buttons = () => {
             </a>
 
             {/* GitHub Button */}
-            <a href="https://github.com/yourgithubprofile" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/adityaapraveen" target="_blank" rel="noopener noreferrer">
               <button className="bt">
                 <div className="light-holder">
                     <div className="dot" />
@@ -39,7 +39,7 @@ const Buttons = () => {
             </a>
 
             {/* LinkedIn Button */}
-            <a href="https://www.linkedin.com/in/yourlinkedinprofile" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/aditya-praveen-39263924a/" target="_blank" rel="noopener noreferrer">
               <button className="bt">
                 <div className="light-holder">
                     <div className="dot" />
@@ -55,7 +55,7 @@ const Buttons = () => {
             </a>
 
             {/* Twitter Button */}
-            <a href="https://twitter.com/yourtwitterprofile" target="_blank" rel="noopener noreferrer">
+            <a href="https://x.com/AdityaaPraveen" target="_blank" rel="noopener noreferrer">
               <button className="bt">
                 <div className="light-holder">
                     <div className="dot" />
