@@ -16,7 +16,7 @@ const projectsData = [
         id: 2,
         title: "Twist-Tac-Toe",
         description: "Tic-Tac-Toe game with a twist mechanic allowing only three X's or O's on the board, eliminating draws. Features dynamic styling and animations with Framer Motion.",
-        tags: ["React", "Vite", "Framer Motion", "Game"],
+        tags: ["React", "Vite", "Framer Motion"],
         demo: "https://twist-tac-toe.vercel.app/",
         source: "https://github.com/adityaapraveen/Twist-Tac-Toe"
       },
@@ -26,7 +26,7 @@ const projectsData = [
         description: "Built a website for a Exports Company using React, Tailwind CSS, TypeScript, and Framer Motion.",
         tags: ["React", "Vite", "Framer Motion", "Game"],
         demo: "https://modernconceptsexports.com/",
-        // source: "#"
+        
       },
   {
     id: 4,
