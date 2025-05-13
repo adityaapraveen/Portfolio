@@ -419,3 +419,78 @@ p {
     font-size: 16px;
   }
 }
+
+/* Updated CSS for making the 'Projects' and 'Contact Me' sections responsive */
+
+/* Responsive styles for Projects Section */
+@media (max-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(1fr);
+    /* 2 columns for medium screens */
+    /* gap: 100px; */
+    
+    
+  }
+
+  .card {
+    width: 90%;
+    min-height:18rem;
+    
+    /* Take full width within the grid */
+    height: auto;
+    /* Adjust height to content */
+  }
+}
+
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr;
+    /* Single column for smaller screens */
+    gap: 10px;
+  }
+}
+
+/* Responsive styles for Contact Me Section */
+@media (max-width: 768px) {
+  .allbuttons {
+    flex-direction: column;
+    /* Stack buttons vertically */
+    gap: 1rem;
+    /* Adjust spacing between buttons */
+  }
+
+  .light-button button.bt {
+    height: auto;
+    /* Adjust height for smaller screens */
+  }
+
+  .light-button button.bt .button-holder {
+    width: 80px;
+    /* Smaller button width */
+    height: 80px;
+    /* Smaller button height */
+  }
+
+  .light-button button.bt .button-holder svg {
+    height: 40px;
+    /* Adjust SVG size */
+  }
+}
+
+@media (max-width: 480px) {
+  .allbuttons {
+    gap: 0.5rem;
+    /* Tighter spacing for very small screens */
+  }
+
+  .light-button button.bt .button-holder {
+    width: 70px;
+    /* Further reduce button size */
+    height: 70px;
+  }
+
+  .light-button button.bt .button-holder svg {
+    height: 30px;
+    /* Adjust SVG size further */
+  }
+}

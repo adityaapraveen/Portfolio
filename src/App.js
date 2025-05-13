@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import './App.css';
+import './components/styles.css';
 import SplitText from './animations/SplitText'; // Import SplitText component
 import DecryptedText from './animations/DecryptText'
 import BlurText from './animations/BlurText'
@@ -7,208 +9,316 @@ import BlurText from './animations/BlurText'
 // import Squares from './animations/Squares';
 import ScrollLinked from './animations/ScrollLinked';
 // import Timeline from './animations/Timeline';
-import { useState } from 'react';
 import ContactMe from './animations/ContactMe';
 // import RollingGallery from './animations/RollingGallery';
 // import QuiltedImageList from './animations/QuiltedImageList';
 
-
+// Import new components
+import AnimatedNavbar from './components/AnimatedNavbar';
+import ProjectsGrid from './components/ProjectsGrid';
+import AnimatedGallery from './components/AnimatedGallery';
+import AnimatedContact from './components/AnimatedContact';
+import Resume from './components/Resume';
+import ParticleBackground from './components/ParticleBackground';
 
 function App() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
+
+  // Scroll to section when hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          window.scrollTo({
+            top: element.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    
+    // Handle initial load with hash
+    if (window.location.hash) {
+      setTimeout(handleHashChange, 500);
+    }
+    
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
   return (
     <div className="App">
+      {/* Background particle effect */}
+      <ParticleBackground />
       
-      {/* Render the Squares background */}
-      {/* <Squares 
-        speed={0.5} 
-        squareSize={40}
-        direction='diagonal' // Can be up, down, left, right, diagonal
-        borderColor='#fff'
-        hoverFillColor='#222'
-      /> */}
-      <header className="App-header">
-        <nav>
-          {/* Hamburger icon */}
-          <button className="navbar-toggle" onClick={toggleNavbar}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <ul className={isOpen ? 'show' : ''}>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#whoami">Whoami</a></li>
-            <li><a href="#experience">XP</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
-      </header>
-      <ScrollLinked />
+      {/* Progress bar */}
+      <motion.div
+        className="progress-bar"
+        style={{
+          scaleX,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 5,
+          originX: 0,
+          backgroundColor: "#1db954",
+          zIndex: 1001,
+        }}
+      />
+      
+      {/* Navbar */}
+      <AnimatedNavbar />
+      
+      {/* Home section */}
       <section id="home">
-        <h1 className='intro'>
-          <SplitText text="Hi, my name is" className="highlight" />
-        </h1>
-        <h1>
-          <DecryptedText
-            text="Aditya Praveen"
-            speed={100}
-            maxIterations={20}
-            characters="ABCDEF1234!?"
-            className="revealed"
-            revealDirection='start'
-            parentClassName="all-letters"
-            encryptedClassName="encrypted"
-          />
-        </h1>
-        <h3>
-          <BlurText
-            text="Welcome To My Portfolio!"
-            delay={200}
-            animateBy="words"
-            direction="bottom"
-            className="text-2xl mb-8"
-          />
-        </h3>
+        <div className="home-content">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="intro-text"
+          >
+            <h1 className="intro">
+              <SplitText text="Hi, my name is" className="highlight" />
+            </h1>
+            <h1>
+              <DecryptedText
+                text="Aditya Praveen"
+                speed={100}
+                maxIterations={20}
+                characters="ABCDEF1234!?"
+                className="revealed"
+                revealDirection="start"
+                parentClassName="all-letters"
+                encryptedClassName="encrypted"
+              />
+            </h1>
+            <h3>
+              <BlurText
+                text="Welcome To My Portfolio!"
+                delay={200}
+                animateBy="words"
+                direction="bottom"
+                className="text-2xl mb-8"
+              />
+            </h3>
+            
+            <motion.div 
+              className="cta-buttons"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2, duration: 0.5 }}
+            >
+              <motion.a 
+                href="#projects"
+                className="primary-button"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                View My Work
+              </motion.a>
+              <motion.a 
+                href="#resume"
+                className="secondary-button"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Resume
+              </motion.a>
+            </motion.div>
+          </motion.div>
+        </div>
       </section>
 
+      {/* About section */}
       <section id="whoami">
-        <h2>
-          <SplitText text="About Me" />
-        </h2>
-        <p className='whoamitext'>Hi, I'm a college student studying computer science, spending most of my time coding and working on fun weekend projects. I'm into blockchain and web development and consider myself a generalist. When I’m not wrangling with code, you’ll find me behind a camera exploring photography—or recently, videography, which has been an exciting new challenge. I also enjoy playing chess when I need a mental reset. On top of all that, I’m a huge fan of movies and shows, so if I'm not building something or taking photos, I'm probably lost in the world of cinema.
-</p>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2>
+            <SplitText text="About Me" />
+          </h2>
+          <div className="about-container">
+            <div className="about-text">
+              <p className="whoamitext">
+                Hi, I'm a college student studying computer science, spending most of my time coding and working on fun weekend projects. I'm into blockchain and web development and consider myself a generalist. 
+              </p>
+              <p className="whoamitext">
+                When I'm not wrangling with code, you'll find me behind a camera exploring photography—or recently, videography, which has been an exciting new challenge. I also enjoy playing chess when I need a mental reset.
+              </p>
+              <p className="whoamitext">
+                On top of all that, I'm a huge fan of movies and shows, so if I'm not building something or taking photos, I'm probably lost in the world of cinema.
+              </p>
+            </div>
+          </div>
+        </motion.div>
       </section>
+
+      {/* Experience section */}
       <section id="experience">
-        <h2>
-          <SplitText text="Experience" />
-        </h2>
-        <p></p>
-        {/* <Timeline /> */}
-        <div className="experience-section">
-      <div className="book">
-        <p>Designed a dynamic user interface for artist profiles, increasing engagement.
-Developed secure backend integrations for artist-user interactions, leading to a rise in connections.</p>
-        <div className="cover">
-          <p>Shaale</p>
-          <p>Front-End Dev Intern</p>
-          <p className="dates">Feb 2024 - June 2024</p> {/* Dates on a new line */}
-        </div>
-      </div>
-      <div className="book">
-        <p>Conducted research on preventing deepfakes in blockchain systems by focusing on detection and
-mitigation techniques before immutability</p>
-        <div className="cover">
-          <p>Center of Blockchain, RV University</p>
-          <p className="dates">July 2024 - Present</p> {/* Dates on a new line */}
-        </div>
-      </div>
-    </div>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2>
+            <SplitText text="Experience" />
+          </h2>
+          <div className="experience-section">
+            <motion.div 
+              className="experience-card"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              whileHover={{ 
+                y: -10,
+                boxShadow: "0px 15px 30px rgba(29, 185, 84, 0.2)"
+              }}
+            >
+              <div className="experience-card-header">
+                <h3>Front-End Dev Intern</h3>
+                <div className="company-badge">
+                  <span>Shaale</span>
+                </div>
+              </div>
+              <div className="experience-card-period">Feb 2024 - June 2024</div>
+              <div className="experience-card-content">
+                <p>Designed a dynamic user interface for artist profiles, increasing engagement. Developed secure backend integrations for artist-user interactions, leading to a rise in connections.</p>
+              </div>
+              <div className="experience-card-skills">
+                <span className="skill-chip">UI Design</span>
+                <span className="skill-chip">Frontend</span>
+                <span className="skill-chip">Integration</span>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="experience-card"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              whileHover={{ 
+                y: -10,
+                boxShadow: "0px 15px 30px rgba(29, 185, 84, 0.2)"
+              }}
+            >
+              <div className="experience-card-header">
+                <h3>Research Assistant</h3>
+                <div className="company-badge">
+                  <span>Center of Blockchain, RV University</span>
+                </div>
+              </div>
+              <div className="experience-card-period">July 2024 - Present</div>
+              <div className="experience-card-content">
+                <p>Conducting research on preventing deepfakes in blockchain systems by focusing on detection and mitigation techniques before immutability.</p>
+              </div>
+              <div className="experience-card-skills">
+                <span className="skill-chip">Blockchain</span>
+                <span className="skill-chip">Research</span>
+                <span className="skill-chip">Security</span>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </section>
 
+      {/* Projects section */}
       <section id="projects">
-        <h2>
-          <SplitText text="Projects" />
-        </h2>
-        <div class="cards">
-          <div class="card">
-            <h3>Summify</h3>
-            <div class="card__content">
-              <p class="card__title">YouTube Video Summarizer Extension</p>
-              <p class="card__description">Built a Flask web extension for YouTube video summaries using YouTube Transcript API and Google Gemini AI. Integrated Hugging Face for Q&A (interactive), translation, and summarization.</p>
-              <button class="card__button">Live Demo</button>
-              <button class="card__button secondary">Source Code</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>TradeBot</h3>
-            <div class="card__content">
-              <p class="card__title">Crypto EMA Strategy Trading Bot</p>
-              <p class="card__description">Automated trading bot using Python and CCXT library, achieving an average monthly ROI of 12%.
-- Handled over 500 trades with a win rate of 60%. </p>
-              <button class="card__button">Live Demo</button>
-              <button class="card__button secondary">Source Code</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>EmotionAI</h3>
-            <div class="card__content">
-              <p class="card__title">Speech Emotion Recognition</p>
-              <p class="card__description">Developed an LSTM model with an accuracy of 85% on the TESS dataset for emotion classification.
-- Processed over 1,200 audio samples with real-time emotion detection.</p>
-              <button class="card__button">Live Demo</button>
-              <button class="card__button secondary">Source Code</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>PlantScanAI</h3>
-            <div class="card__content">
-              <p class="card__title">Plant Recognition and Detection System</p>
-              <p class="card__description">Built a machine learning model with an accuracy of 95.47% for identifying and detecting household plants.
-Implemented reliable classification among 10 different plant classes.
-Integrated the model into a React app for real-time camera-based recognition.</p>
-              <button class="card__button">Live Demo</button>
-              <button class="card__button secondary">Source Code</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>Tic-Tac-Toe with a TWIST</h3>
-            <div class="card__content">
-              <p class="card__title">Twist-Tac-Toe</p>
-              <p class="card__description">This Tic-Tac-Toe game, built with React and Vite, features a twist mechanic with only three X’s
-or O’s on the board, <b>eliminating draws.</b> It includes dynamic styling, player turn indicators, and animations using
-Framer Motion.</p>
-              <button class="card__button">Live Demo</button>
-              <button class="card__button secondary">Source Code</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>EduCore</h3>
-            <div class="card__content">
-              <p class="card__title">Student Information System</p>
-              <p class="card__description">The Student Information System smart contract on Sepolia manages student
-records, enrollment, attendance, and grades, with updates controlled by the owner and payment. It uses mappings
-for storage and event logging for transparency.</p>
-              <button class="card__button">Live Demo</button>
-              <button class="card__button secondary">Source Code</button>
-            </div>
-          </div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2>
+            <SplitText text="Projects" />
+          </h2>
+          <ProjectsGrid />
+        </motion.div>
       </section>
 
+      {/* Resume section */}
+      <section id="resume">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2>
+            <SplitText text="Resume" />
+          </h2>
+          <Resume />
+        </motion.div>
+      </section>
 
+      {/* Gallery section */}
       <section id="gallery">
-        <h2>
-          <SplitText text="Gallery" />
-        </h2>
-        <p>[Images To Be Added]</p>
-        
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2>
+            <SplitText text="Gallery" />
+          </h2>
+          <AnimatedGallery />
+        </motion.div>
       </section>
 
+      {/* Contact section */}
       <section id="contact">
-        <h2>
-          <SplitText text="Contact" />
-        </h2>
-        <p>Email: <a href="mailto:adityapraveen18@gmail.com">adityapraveen18@gmail.com</a></p>
-        <ContactMe />
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2>
+            <SplitText text="Contact" />
+          </h2>
+          <AnimatedContact />
+        </motion.div>
       </section>
 
-
+      {/* Footer */}
       <footer>
-        <p>Created by <span className="highlight">Aditya Praveen</span>. Powered by React.</p>
+        <div className="footer-content">
+          <p className="footer-text">Created by <span className="highlight">Aditya Praveen</span>. Powered by React.</p>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            &copy; {new Date().getFullYear()} All Rights Reserved
+          </motion.p>
+        </div>
       </footer>
     </div>
-    
   );
 }
 
