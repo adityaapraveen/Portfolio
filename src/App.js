@@ -2,26 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import './App.css';
 import './components/styles.css';
-import SplitText from './animations/SplitText'; // Import SplitText component
-import DecryptedText from './animations/DecryptText'
-import BlurText from './animations/BlurText'
-// import Hyperspeed from './animations/Hyperspeed';
-// import Squares from './animations/Squares';
+import { VscHome, VscArchive, VscAccount, VscSettingsGear } from 'react-icons/vsc';
+import SplitText from './animations/SplitText';
 import ScrollLinked from './animations/ScrollLinked';
-// import Timeline from './animations/Timeline';
 import ContactMe from './animations/ContactMe';
-// import RollingGallery from './animations/RollingGallery';
-// import QuiltedImageList from './animations/QuiltedImageList';
 
-// Import new components
 import AnimatedNavbar from './components/AnimatedNavbar';
 import ProjectsGrid from './components/ProjectsGrid';
 import AnimatedGallery from './components/AnimatedGallery';
 import AnimatedContact from './components/AnimatedContact';
 import Resume from './components/Resume';
 import ParticleBackground from './components/ParticleBackground';
+import HomeSection from './components/HomeSection';
 
 function App() {
+  const items = [
+    { id: 'home', icon: <VscHome /> },
+    { id: 'whoami', icon: <VscAccount /> },
+    { id: 'projects', icon: <VscArchive /> },
+    { id: 'gallery', icon: <VscSettingsGear /> },
+  ];
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -85,67 +86,11 @@ function App() {
       
       {/* Navbar */}
       <AnimatedNavbar />
+   
       
+
       {/* Home section */}
-      <section id="home">
-        <div className="home-content">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="intro-text"
-          >
-            <h1 className="intro">
-              <SplitText text="Hi, my name is" className="highlight" />
-            </h1>
-            <h1>
-              <DecryptedText
-                text="Aditya Praveen"
-                speed={100}
-                maxIterations={20}
-                characters="ABCDEF1234!?"
-                className="revealed"
-                revealDirection="start"
-                parentClassName="all-letters"
-                encryptedClassName="encrypted"
-              />
-            </h1>
-            <h3>
-              <BlurText
-                text="Welcome To My Portfolio!"
-                delay={200}
-                animateBy="words"
-                direction="bottom"
-                className="text-2xl mb-8"
-              />
-            </h3>
-            
-            <motion.div 
-              className="cta-buttons"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2, duration: 0.5 }}
-            >
-              <motion.a 
-                href="#projects"
-                className="primary-button"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View My Work
-              </motion.a>
-              <motion.a 
-                href="#resume"
-                className="secondary-button"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Resume
-              </motion.a>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      <HomeSection />
 
       {/* About section */}
       <section id="whoami">

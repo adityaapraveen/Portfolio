@@ -68,7 +68,7 @@ nav ul li a:hover {
 .navbar-toggle span {
   width: 25px;
   height: 3px;
-  background-color: #ccc;
+  background-color: #ff3c3c;
   transition: 0.3s;
 }
 
@@ -103,13 +103,15 @@ nav ul.show {
     display: flex;
     /* Display the menu when open */
   }
+
+  .rotating-text {
+    display: flex;
+    width: 100px;
+    font-family: 'Doto', sans-serif;
+  }
 }
 
-section {
-  padding: 50px 20px;
-  text-align: center;
-  color: #e0e0e0;
-}
+
 
 .highlight {
   color: #8b8b8b;
@@ -129,12 +131,12 @@ footer {
 
 h1,
 h2 {
-  font-size: 3.5em;
+  font-size: 2em;
   font-weight: 400;
 }
 
 h3 {
-  font-size: 3em;
+  font-size: 1em;
   font-weight: 400;
 }
 
@@ -298,8 +300,15 @@ p {
   border: 1px solid #777;
 }
 
+.mobile-only {
+  display: none; /* Hidden by default */
+}
 
-
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block; /* Shown on mobile */
+  }
+}
 
 /* Responsive Styles */
 
@@ -327,9 +336,7 @@ p {
     padding: 0;
   }
 
-  section {
-    padding: 30px 15px;
-  }
+
 
   .book {
     width: 180px;
@@ -369,9 +376,7 @@ p {
     margin: 10px 0;
   }
 
-  section {
-    padding: 20px 10px;
-  }
+
 
   .book {
     width: 150px;
@@ -402,9 +407,7 @@ p {
     font-size: 3em;
   }
 
-  section {
-    padding: 70px 30px;
-  }
+
 
   .book {
     width: 250px;

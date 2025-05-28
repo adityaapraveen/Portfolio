@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, animate } from 'framer-motion';
+import RotatingText from '../animations/RotatingText';
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -70,28 +71,28 @@ const AnimatedNavbar = () => {
       animate="visible"
     >
       <div className="navbar-container">
-        <motion.div 
-          className="navbar-logo"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <a href="#home">
-            <span className="logo-text">AP</span>
-          </a>
-        </motion.div>
+        <div className="navbar-brand-container">
+          <motion.div 
+            className="navbar-logo"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            
+          </motion.div>
+        </div>
 
-        <motion.button 
-          className={`navbar-toggle ${isOpen ? 'open' : ''}`}
-          onClick={toggleNavbar}
-          variants={buttonVariants}
-          initial="rest"
-          whileHover="hover"
-          whileTap="tap"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </motion.button>
+        <RotatingText
+          texts={['Generalist', 'FullstackDev', 'Photographer', 'Friend']}
+          className="rotating-text mobile-only"
+          staggerFrom={"last"}
+          initial={{ y: "100%", opacity: 0 }}
+          animate={{ y: 0, opacity: 1}}
+          exit={{ y: "-120%", opacity: 0,  }}
+          staggerDuration={0.025}
+          splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+          transition={{ type: "spring", damping: 50, stiffness: 400 }}
+          rotationInterval={3000}
+        />
 
         <AnimatePresence>
           <motion.ul 
@@ -129,6 +130,20 @@ const AnimatedNavbar = () => {
             ))}
           </motion.ul>
         </AnimatePresence>
+
+        <motion.button 
+          className={`navbar-toggle mobile-toggle ${isOpen ? 'open' : ''}`}
+          onClick={toggleNavbar}
+          variants={buttonVariants}
+          initial="rest"
+          whileHover="hover"
+          whileTap="tap"
+        >
+      
+          <span></span>
+          <span></span>
+          <span></span>
+        </motion.button>
       </div>
     </motion.nav>
   );
