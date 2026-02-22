@@ -1,12 +1,712 @@
-/* Hide scrollbar but allow scrolling for the entire app */
-body {
-    overflow-y: scroll;
-    /* Allow vertical scrolling */
-    scrollbar-width: none;
-    /* Hide scrollbar for Firefox */
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Figtree:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-color: #000000;
+  --text-main: #bebebe;
+  --text-muted: #ffffff;
+  --text-dim: #ffffff;
+  --border-color: rgba(39, 39, 42, 0.5);
+  --brand: #7dd3fc;
+  --card-bg: rgba(255, 255, 255, 0.02);
+
+  --font-heading: 'Doto', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Figtree', sans-serif;
+
+  --shadow-btn:
+    0px 32px 64px -16px rgba(0, 0, 0, 0.3),
+    0px 16px 32px -8px rgba(0, 0, 0, 0.3),
+    0px 8px 16px -4px rgba(0, 0, 0, 0.24),
+    0px 4px 8px -2px rgba(0, 0, 0, 0.24),
+    0px -8px 16px -1px rgba(0, 0, 0, 0.16),
+    0px 2px 4px -1px rgba(0, 0, 0, 0.24),
+    0px 0px 0px 1px #000,
+    inset 0px 0px 0px 1px rgba(255, 255, 255, 0.08),
+    inset 0px 1px 0px rgba(255, 255, 255, 0.2);
 }
 
-body::-webkit-scrollbar {
-    display: none;
-    /* Hide scrollbar for Chrome, Safari, and Edge */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.65;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Blue edge vignette */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* background:
+    radial-gradient(ellipse at 0% 0%, rgba(30, 64, 175, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 0%, rgba(30, 64, 175, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 0% 100%, rgba(30, 64, 175, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(30, 64, 175, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(30, 64, 175, 0.06) 100%); */
+  pointer-events: none;
+  z-index: 0;
+}
+
+::selection {
+  background: rgba(125, 211, 252, 0.3);
+  color: #fff;
+}
+
+/* ===== Layout ===== */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem 8rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Pixel heading (name) ===== */
+.pixel-heading {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fafafa;
+  letter-spacing: normal;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+/* ===== Mono text ===== */
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ===== Deep shadow button ===== */
+.shadow-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  background: #1a1b1c;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.shadow-btn:hover {
+  background: #222324;
+  color: var(--brand);
+}
+
+.shadow-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ===== Social link button (pill) ===== */
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.2rem;
+  background: #1a1b1c;
+  border: 1px solid rgba(39, 39, 42, 0.5);
+  border-radius: 6px;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.social-btn:hover {
+  color: var(--brand);
+  border-color: rgba(125, 211, 252, 0.15);
+}
+
+.social-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ===== Dashed card ===== */
+.dashed-card {
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  background: var(--card-bg);
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.dashed-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== Project card thumbnail ===== */
+.project-thumb {
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: #0c0c0c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== Timeline styles ===== */
+.timeline-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  position: relative;
+  padding: 0 0.5rem;
+}
+
+.timeline-segment {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.timeline-line {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.timeline-line.active {
+  background: #fff;
+}
+
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.timeline-dot.active {
+  background: #fff;
+}
+
+.timeline-entry {
+  text-align: center;
+}
+
+.timeline-entry-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.35rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.timeline-entry-title {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.timeline-entry-date {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-top: 0.15rem;
+}
+
+/* ===== Contribution grid overrides (grayscale) ===== */
+.contrib-grid {
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.contrib-grid .react-activity-calendar {
+  font-family: var(--font-mono) !important;
+}
+
+/* ===== Bottom Dock Nav ===== */
+.dock-nav {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.6rem 1.5rem;
+  background: rgba(12, 12, 12, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.dock-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 12px;
+  color: var(--text-dim);
+  font-size: 0.65rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.dock-item:hover,
+.dock-item.active {
+  color: #fff;
+}
+
+.dock-item svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ===== Process diagram ===== */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.process-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.process-box {
+  width: 80px;
+  height: 80px;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.02);
+  position: relative;
+}
+
+.process-box svg {
+  width: 24px;
+  height: 24px;
+  color: var(--text-dim);
+}
+
+.process-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* ===== Footer ===== */
+.footer {
+  text-align: left;
+  padding: 3rem 0 2rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.footer .heart-icon {
+  width: 28px;
+  height: 28px;
+  color: rgba(255, 255, 255, 0.15);
+  margin-bottom: 0.75rem;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .pixel-heading {
+    font-size: 2rem;
+  }
+
+  .container {
+    padding: 2rem 1rem 7rem;
+  }
+
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cta-buttons {
+    display: none !important;
+  }
+}
+
+/* ===== GitHub Tooltip (UIverse) ===== */
+.tooltip-container {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 17px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.tooltip-container .tooltip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  border-radius: 15px;
+  z-index: 50;
+}
+
+.tooltip-container .tooltip .profile {
+  background: #2a2b2f;
+  border-radius: 10px 15px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
+.tooltip-container:hover .tooltip {
+  top: -150px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.tooltip-container .icon {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+}
+
+.tooltip-container .layer {
+  width: 55px;
+  height: 55px;
+  transition: transform 0.3s;
+}
+
+.tooltip-container .icon:hover .layer {
+  transform: rotate(-35deg) skew(20deg);
+}
+
+.tooltip-container .layer span {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  height: 70%;
+  width: 70%;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.tooltip-container .layer span,
+.tooltip-container .text {
+  color: #fafafa;
+  border-color: #fafafa;
+}
+
+.tooltip-container .icon:hover .layer span {
+  box-shadow: -1px 1px 3px #fafafa;
+}
+
+.tooltip-container .icon .text {
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  opacity: 0;
+  font-weight: 500;
+  transform: translateX(-50%);
+  transition: bottom 0.3s ease, opacity 0.3s ease;
+  font-size: 0.75rem;
+}
+
+.tooltip-container .icon:hover .text {
+  bottom: -35px;
+  opacity: 1;
+}
+
+.tooltip-container .icon:hover .layer span:nth-child(1) {
+  opacity: 0.2;
+}
+
+.tooltip-container .icon:hover .layer span:nth-child(2) {
+  opacity: 0.4;
+  transform: translate(5px, -5px);
+}
+
+.tooltip-container .icon:hover .layer span:nth-child(3) {
+  opacity: 0.6;
+  transform: translate(10px, -10px);
+}
+
+.tooltip-container .icon:hover .layer span:nth-child(4) {
+  opacity: 0.8;
+  transform: translate(15px, -15px);
+}
+
+.tooltip-container .icon:hover .layer span:nth-child(5) {
+  opacity: 1;
+  transform: translate(20px, -20px);
+}
+
+.tooltip-container .layer span.github-icon {
+  font-size: 30px;
+  line-height: 55px;
+  text-align: center;
+  fill: #fafafa;
+  background: #0b0d0e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tooltip-container .user {
+  display: flex;
+  gap: 10px;
+}
+
+.tooltip-container .img {
+  width: 50px;
+  height: 50px;
+  font-size: 25px;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1b1c;
+  color: #fafafa;
+}
+
+.tooltip-container .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tooltip-container .name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #fafafa;
+}
+
+.tooltip-container .details {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  color: #fff;
+}
+
+.tooltip-container .username {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.tooltip-container .about {
+  color: #8c8c8c;
+  padding-top: 5px;
+  font-size: 0.8rem;
+}
+
+/* ===== DM Tooltip (UIverse shaking) ===== */
+.dm-tooltip-wrap {
+  --dm-bg: #1a1b1c;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 6px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dm-tooltip-wrap .dm-tip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.3em 0.6em;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  background: var(--dm-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #fafafa;
+  z-index: 50;
+}
+
+.dm-tooltip-wrap .dm-tip::before {
+  position: absolute;
+  content: "";
+  height: 0.6em;
+  width: 0.6em;
+  bottom: -0.3em;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  background: var(--dm-bg);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dm-tooltip-wrap:hover .dm-tip {
+  top: -110%;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  animation: dm-shake 500ms ease-in-out forwards;
+}
+
+@keyframes dm-shake {
+  0% {
+    transform: translateX(-50%) rotate(2deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-3deg);
+  }
+
+  70% {
+    transform: translateX(-50%) rotate(3deg);
+  }
+
+  100% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+}
+
+.dm-tooltip-wrap .dm-btn-text {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dm-tooltip-wrap .dm-btn-text::before {
+
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.85rem;
+  color: #fafafa;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+
+.dm-tooltip-wrap:hover .dm-btn-text::before {
+  top: 0;
+}
+
+/* Bottom variant */
+.dm-tooltip-bottom .dm-tip {
+  top: auto;
+  bottom: 0;
+}
+
+.dm-tooltip-bottom .dm-tip::before {
+  bottom: auto;
+  top: -0.3em;
+  border-right: none;
+  border-bottom: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dm-tooltip-bottom:hover .dm-tip {
+  top: auto;
+  bottom: -110%;
+  animation: dm-shake-bottom 500ms ease-in-out forwards;
+}
+
+@keyframes dm-shake-bottom {
+  0% {
+    transform: translateX(-50%) rotate(2deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-3deg);
+  }
+
+  70% {
+    transform: translateX(-50%) rotate(3deg);
+  }
+
+  100% {
+    transform: translateX(-50%) rotate(0deg);
+  }
 }
