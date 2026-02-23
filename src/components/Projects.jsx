@@ -25,13 +25,20 @@ const projectData = [
         thumbnail: './image2.png',
     },
     {
+        title: 'Express REST-API From Scratch',
+        stars: null,
+        description: "A RESTful API that provides comprehensive data about the world's most promising startups. Built with Node.js and Express, this API allows you to filter and search startup information across various industries, countries, and continents.",
+        href: 'https://github.com/adityaapraveen/Express-RESTAPI',
+        thumbnail: './image5.png',
+    },
+    {
         title: 'Vakeel AI',
         stars: null,
         description: 'This project is a legal chatbot that provides legal advice and helps users with various legal queries. The chatbot uses a combination of advanced technologies such as Retrieval-Augmented Generation (RAG), semantic search, vector databases, and large language models (LLMs) to provide precise and relevant answers. It utilizes Milvus as a vector database for indexing legal documents, and Ollama (Llama 3.2 1B parameters) as the underlying large language model to interpret user queries.',
         href: 'https://github.com/adityaapraveen/Vakeel-AI',
         thumbnail: './image3.png',
     },
-    
+
 ];
 
 const Projects = () => {
