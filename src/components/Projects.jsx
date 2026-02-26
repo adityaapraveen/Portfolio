@@ -11,11 +11,11 @@ const projectData = [
         thumbnail: './image1.png',
     },
     {
-        title: 'Wild-Horizons-RESTAPI',
+        title: 'Dynamic Search Express API',
         stars: null,
-        description: 'A vanilla Node.js REST API built from scratch that showcases the worlds most fascinating travel destinations. This project demonstrates core REST API concepts including routing, request handling, data filtering, and HTTP response management using only the Node.js http module—no external frameworks required.',
-        href: 'https://github.com/adityaapraveen/Wild-Horizons-RESTAPI',
-        thumbnail: './image4.png',
+        description: 'A RESTful API built with Express.js and SQLite, following an MVC architecture with separated route handlers and controller logic. Exposes parameterised GET endpoints that construct conditional SQL queries at runtime, supporting exact-match genre filtering and multi-column LIKE-based full-text search across title, artist, and genre fields.',
+        href: 'https://dynamic-search-express-api.onrender.com/',
+        thumbnail: './image6.png',
     },
     {
         title: 'Adaptive Learning Management System',
