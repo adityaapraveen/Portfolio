@@ -11,6 +11,13 @@ const projectData = [
         thumbnail: './image1.png',
     },
     {
+        title: 'Course Selling Platform',
+        stars: null,
+        description: 'A full-stack course selling web application built with Node.js, Express, and SQLite. The platform supports two distinct user roles — learners and administrators — each with dedicated authentication flows, dashboards, and capabilities. The entire application, including the frontend, is served from a single Express server and is production-ready for deployment on platforms like Render.',
+        href: 'https://coursesellingapi.onrender.com/',
+        thumbnail: './image7.png',
+    },
+    {
         title: 'Dynamic Search Express API',
         stars: null,
         description: 'A RESTful API built with Express.js and SQLite, following an MVC architecture with separated route handlers and controller logic. Exposes parameterised GET endpoints that construct conditional SQL queries at runtime, supporting exact-match genre filtering and multi-column LIKE-based full-text search across title, artist, and genre fields.',
