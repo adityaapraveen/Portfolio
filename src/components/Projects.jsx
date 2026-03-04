@@ -25,11 +25,11 @@ const projectData = [
         thumbnail: './image6.png',
     },
     {
-        title: 'Adaptive Learning Management System',
+        title: 'mind-F-Layer - A Brain you can Query!',
         stars: null,
-        description: 'The Adaptive Learning Management System is a comprehensive educational platform that connects teachers and students through a secure and efficient interface. Built using a microservices architecture, it provides a scalable and maintainable solution for educational institutions.',
-        href: 'https://github.com/adityaapraveen/AdaptiveLearningMS',
-        thumbnail: './image2.png',
+        description: 'MIND-f-LAYER is a full-stack "Second Brain" application designed to store, manage, and semantically query your digital knowledge. By leveraging modern AI and a sleek, minimalistic design, it transforms a static list of links and notes into an interactive, searchable intelligence layer.',
+        href: 'https://mind-f-layer.onrender.com/',
+        thumbnail: './image777.png',
     },
     {
         title: 'Express REST-API From Scratch',
@@ -56,7 +56,7 @@ const Projects = () => {
                 fontSize: '0.95rem',
                 marginBottom: '1.5rem',
             }}>
-                Check out my <strong style={{ color: '#fff' }}>Projects</strong>
+                Check out my <strong style={{ color: '#fff' }}>Live Projects</strong>
             </p>
 
             <div style={{
