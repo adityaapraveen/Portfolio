@@ -4,6 +4,13 @@ import { Star } from 'lucide-react';
 
 const projectData = [
     {
+        title: 'URL Shortening Service',
+        stars: null,
+        description: 'A production-grade URL shortening service built like a senior developer would build it. Full-stack application with a Node.js/Express backend, SQLite database, and a React (Vite) frontend — designed for deployment on Render.',
+        href: 'https://url-shortening-service-ui.onrender.com/',
+        thumbnail: './image8.png',
+    },
+    {
         title: 'Modern Concepts Exports',
         stars: null,
         description: 'Developed a responsive export business website using ReactJS. The project is fully hosted on the internet using GitHub hosting with a custom domain. Through this, I gained hands on experience with DNS configuration, SSL certificates, and how HTTP works in real world deployment scenarios.',
@@ -17,13 +24,7 @@ const projectData = [
         href: 'https://coursesellingapi.onrender.com/',
         thumbnail: './image7.png',
     },
-    {
-        title: 'Dynamic Search Express API',
-        stars: null,
-        description: 'A RESTful API built with Express.js and SQLite, following an MVC architecture with separated route handlers and controller logic. Exposes parameterised GET endpoints that construct conditional SQL queries at runtime, supporting exact-match genre filtering and multi-column LIKE-based full-text search across title, artist, and genre fields.',
-        href: 'https://dynamic-search-express-api.onrender.com/',
-        thumbnail: './image6.png',
-    },
+    
     {
         title: 'mind-F-Layer - A Brain you can Query!',
         stars: null,
